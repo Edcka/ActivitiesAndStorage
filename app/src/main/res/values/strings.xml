@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ActivitiesAndStorage</string>
+    <string name="add">ADD</string>
+    <string name="delete">DELETE</string>
 </resources>
