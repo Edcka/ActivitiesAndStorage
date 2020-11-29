@@ -1,4 +1,4 @@
-package com.example.activitiesandstorage;
+/*package com.example.activitiesandstorage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +26,10 @@ public class NoteEditorActivity extends AppCompatActivity {
         // Accessing the data using key and value 
         noteId = intent.getIntExtra("noteId", -1);
         if (noteId != -1) {
-            editText.setText(MainActivity.notes.get(noteId));
+            //editText.setText(MainActivity.notes.get(noteId));
         } else {
 
-            MainActivity.notes.add("");
+            //MainActivity.notes.add("");
             noteId = MainActivity.notes.size() - 1;
             MainActivity.arrayAdapter.notifyDataSetChanged();
 
@@ -43,7 +43,7 @@ public class NoteEditorActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                MainActivity.notes.set(noteId, String.valueOf(charSequence));
+                //MainActivity.notes.set(noteId, String.valueOf(charSequence));
                 MainActivity.arrayAdapter.notifyDataSetChanged();
                 // Creating Object of SharedPreferences to store data in the phone 
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
@@ -58,3 +58,4 @@ public class NoteEditorActivity extends AppCompatActivity {
         });
     }
 }
+*/

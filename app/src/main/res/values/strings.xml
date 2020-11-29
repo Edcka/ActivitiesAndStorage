@@ -2,5 +2,7 @@
     <string name="app_name">ActivitiesAndStorage</string>
     <string name="add">ADD</string>
     <string name="delete">DELETE</string>
-    <string name="gfg">GFG</string>
+    <string name="done">Done</string>
+    <string name="content">Content</string>
+    <string name="header">Header</string>
 </resources>
