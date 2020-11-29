@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sharedPref.getString(Note.BASE_NOTE_KEY,"Text");
         String content = sharedPref.getString(Note.BASE_NOTE_CONTENT,"Text");
-
         this.arrayAdapter.add(new Note(name,content).getNote());
         this.arrayAdapter.notifyDataSetChanged();
     }
