@@ -36,16 +36,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
     }
 
-    /* if (notes.size() == -1) {
-
-         notes.add(new Note("Example name", "Example Content"));
-         arrayAdapter.notifyDataSetChanged();
-         // } else {
-         //     notes = new ArrayList(set);
-         // }
-
-         // Using custom listView Provided by Android Studio
-         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -60,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sharedPref.getString(Note.BASE_NOTE_KEY,"Text");
-        arrayAdapter.add(name);
+        String name = sharedPref.getString(Note.BASE_NOTE_KEY,"Header");
+        String content = sharedPref.getString(Note.BASE_NOTE_CONTENT,"Content");
+        arrayAdapter.clear();
+        arrayAdapter.add(name +"\n" + content);
         arrayAdapter.notifyDataSetChanged();
     }
 
@@ -82,41 +74,4 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-
-    /*@Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                // Going from MainActivity to NotesEditorActivity
-        Intent intent = new Intent(getApplicationContext(), AddNoteActivity.class);
-        intent.putExtra("noteId", i);
-        startActivity(intent);
-
-    };*/
-
-
-       /* listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                final int itemToDelete = i;
-                // To delete the data from the App
-                new AlertDialog.Builder(MainActivity.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Are you sure?")
-                        .setMessage("Do you want to delete this note?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                notes.remove(itemToDelete);
-                                arrayAdapter.notifyDataSetChanged();
-                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
-                                HashSet<String> set = new HashSet(MainActivity.notes);
-                                sharedPreferences.edit().putStringSet("notes", set).apply();
-                            }
-                        }).setNegativeButton("No", null).show();
-                return true;
-            }
-        });
-
-        */
 

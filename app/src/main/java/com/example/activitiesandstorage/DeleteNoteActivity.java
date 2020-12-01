@@ -29,7 +29,6 @@ public class DeleteNoteActivity extends AppCompatActivity {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         spinner = findViewById(R.id.spinner);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, names );
-        //arrayAdapter = ArrayAdapter.createFromResource(this, (List<String>) sharedPref.getAll(), android.R.layout.simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
@@ -38,11 +37,14 @@ public class DeleteNoteActivity extends AppCompatActivity {
         arrayAdapter.add(name);
     }
 
-
+ /*
+ NGL labai ilgai uztrukau, kol man smegenai uzkrove, kad tas SharedPrefference po 1 struct
+ saugo ir viskas, nes nenaudojau sito niekad,norejau ismokt, bet dieve mano.
+  */
     public void onButtonDelete(View view) {
-        String myData = spinner.getSelectedItem().toString();
             SharedPreferences.Editor name = sharedPref.edit();
-            name.remove(myData);
+            name.remove(Note.BASE_NOTE_KEY);
+            name.remove(Note.BASE_NOTE_CONTENT);
             name.commit();
             finish();
         }
