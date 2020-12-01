@@ -26,4 +26,8 @@ public class Note {
     public String getNote(){
         return this.name +"\n"+this.content;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }

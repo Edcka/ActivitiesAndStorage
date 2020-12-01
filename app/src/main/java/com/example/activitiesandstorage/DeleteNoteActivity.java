@@ -6,48 +6,44 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import com.example.activitiesandstorage.ui.main.Note;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class DeleteNoteActivity extends AppCompatActivity {
-
-    ArrayList<CharSequence> notes = new ArrayList<>();
-    ArrayAdapter<CharSequence> arrayAdapter;
+    ArrayList<String> names = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
     Spinner spinner;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, this.notes);
-        this.spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.note_name_array, android.R.layout.simple_spinner_item);
+        setContentView(R.layout.activity_deletion);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        spinner = findViewById(R.id.spinner);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, names );
+        //arrayAdapter = ArrayAdapter.createFromResource(this, (List<String>) sharedPref.getAll(), android.R.layout.simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.spinner.setAdapter(arrayAdapter);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sharedPref.getString(Note.BASE_NOTE_KEY, "Text");
-        String content = sharedPref.getString(Note.BASE_NOTE_CONTENT, "Text");
-        this.arrayAdapter.add(new Note(name, content).getNote());
-        this.arrayAdapter.notifyDataSetChanged();
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                String text = spinner.getSelectedItem().toString();
-            }
+        spinner.setAdapter(arrayAdapter);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-
+        String name = sharedPref.getString(Note.BASE_NOTE_KEY,"Text");
+        arrayAdapter.add(name);
     }
-}
+
+
+    public void onButtonDelete(View view) {
+        String myData = spinner.getSelectedItem().toString();
+            SharedPreferences.Editor name = sharedPref.edit();
+            name.remove(myData);
+            name.commit();
+            finish();
+        }
+    }

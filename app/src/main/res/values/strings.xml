@@ -5,4 +5,8 @@
     <string name="done">Done</string>
     <string name="content">Content</string>
     <string name="header">Header</string>
+    <string name="note_name_array">string</string>
+
+    <string-array name="note_name_array" />
+    <item name="Test" type="string"></item>
 </resources>

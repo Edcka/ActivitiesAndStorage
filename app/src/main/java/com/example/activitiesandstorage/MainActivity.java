@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
-        this.listView = findViewById(id.listView);
-        this.arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, this.notes);
-        this.listView.setAdapter(arrayAdapter);
+        listView = findViewById(id.listView);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        listView.setAdapter(arrayAdapter);
     }
 
     /* if (notes.size() == -1) {
@@ -61,30 +61,24 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sharedPref.getString(Note.BASE_NOTE_KEY,"Text");
-        String content = sharedPref.getString(Note.BASE_NOTE_CONTENT,"Text");
-        this.arrayAdapter.add(new Note(name,content).getNote());
-        this.arrayAdapter.notifyDataSetChanged();
+        arrayAdapter.add(name);
+        arrayAdapter.notifyDataSetChanged();
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        switch (item.getItemId()) {
-
-            // Going from MainActivity to NotesEditorActivity 
-            case id.add_note:
-                Intent intent = new Intent(this, AddNoteActivity.class);
-                startActivity(intent);
-                return true;
-            case id.delete_note:
-                intent = new Intent(this, DeleteNoteActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if(item.getItemId() == id.add_note){
+            Intent intent = new Intent(this, AddNoteActivity.class);
+            startActivity(intent);
         }
+        else{
+            Intent intent1 = new Intent(this, DeleteNoteActivity.class);
+            startActivity(intent1);
 
+        }
+        return true;
     }
 }
 
